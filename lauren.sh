@@ -17,6 +17,21 @@ _iterate() {
     - User should feel in control at all times.
     - Design should not need explanation or instructions.
 
+    UI design principles:
+
+    - Actions SHOULD be undoable. Prefer undo over confirm.
+    - Actions SHOULD be able to be optionally delayed where it makes sense.
+    - Actions SHOULD be discoverable. Use affordances, signifiers and feedback.
+      In addition, provide visual cues to guide first time users. Gradually, as
+      users become more familiar with the UI, these cues can be reduced or
+      removed to avoid clutter.
+    - Use progressive disclosure to avoid overwhelming users with too much
+      information at once.
+    - Use consistent visual language and design patterns throughout the UI.
+    - Ensure accessibility for all users, including those with disabilities.
+    - Provide clear and concise error messages that help users recover from
+      mistakes.
+
     Code design principles:
 
     - Always start with data model and data flow before thinking about code.
