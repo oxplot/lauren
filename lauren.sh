@@ -28,7 +28,6 @@ _iterate() {
     - Use progressive disclosure to avoid overwhelming users with too much
       information at once.
     - Use consistent visual language and design patterns throughout the UI.
-    - Ensure accessibility for all users, including those with disabilities.
     - Provide clear and concise error messages that help users recover from
       mistakes.
 
