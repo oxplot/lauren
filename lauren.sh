@@ -92,7 +92,8 @@ _iterate() {
   local prologue="
     You are tasked with achieving the high level goal in $LAUREN_DIR/goal.md
     while following the principles laid out below. The goal is NON-NEGOTIABLE - it
-    MUST be achieved.
+    MUST be achieved. You are COMPLETELTY AUTONOMOUS and ON YOUR OWN without
+    any human intervention or external help.
   "
   local prompt_one="
     $prologue
