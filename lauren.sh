@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+LAUREN_ITER="${LAUREN_ITER:-10}"
+LAUREN_DIR="${LAUREN_DIR:-.lauren}"
+
+_iterate() {
+  local principles="
+    ## Principles
+
+    General design principles:
+
+    - Less is better. Favor minimal solutions that achieve the goal.
+    - Design should surprise the user in a positive way.
+    - Design should delight the user and be aesthetically pleasing.
+    - Design should be timeless, minimal and elegant.
+    - User should feel in control at all times.
+    - Design should not need explanation or instructions.
+
+    Code design principles:
+
+    - Always start with data model and data flow before thinking about code.
+    - Experiment with code to validate the data model and data flow.
+    - Favor simple, straightforward, clear, minimal indirected, well decoupled,
+      composable code.
+    - Iterate until the data model/flow is nailed down and can accommodate
+      current and future requirements.
+    - The code you write will be read by many humans and over a long period of
+      time. Ensure it is simple, unclever, follows idioms of the language you are
+      using, not overly abstracted, not overly optimized, not overly engineered.
+    - Document the 'why' behind blocks of code, not the 'what'.
+
+    Testing principles:
+
+    - If writing unit tests, focus on the interface and contract of the code,
+      not its implementation.
+    - Write tests that are deterministic, isolated, fast, reliable and
+      maintainable.
+    - Favor high level integration tests over low level unit tests.
+  "
+  local requirements="
+    ## Requirements
+
+    The reqirements are defined in $LAUREN_DIR/prd.yaml as an array of objects,
+    each with following fields:
+
+    - description: A well defined description of the requirement.
+    - steps: A list of steps to verify the requirement.
+    - status: One of 'unmet', 'in-progress', 'met', 'invalid'.
+  "
+  local prologue="
+    You are tasked with achieving the high level goal in $LAUREN_DIR/goal.md
+    while following the principles laid out below. The goal is NON-NEGOTIABLE - it
+    MUST be achieved.
+  "
+  local prompt_one="
+    $prologue
+
+    In this session, you will do one iteration towards this goal by:
+    - Breaking down the goal into well defined smaller requirements OR refining,
+      removing, adding to existing requirements from previous iterations. You must
+      ensure that the requirements meet the goal and abide by the principles as
+      well as being specific, measurable, achievable, relevant and time-bound.
+      Use any learnings available in $LAUREN_DIR/learnings.txt to help you with
+      this.
+    - Recording your learnings in a concise manner by appending to
+      $LAUREN_DIR/learnings.txt as you go to help future iterations.
+
+    $requirements
+
+    $principles
+  "
+  local prompt_two="
+    $prologue
+
+    In this session, you will do one iteration towards this goal by:
+    1. Picking the highest priority requirment that is not yet met or continue
+       an in-progress requirement. Pick ONE AND ONLY ONE.
+    2. Implementing, testing and verifying that ONE requirement.
+       - If implementation/testing surfaces problems with any requirements,
+         append your findings to $LAUREN_DIR/learnings.txt and STOP. Do NOT
+         proceed to next steps.
+       - If successful, update $LAUREN_DIR/prd.yaml to mark the requirement as met.
+    3. Refactor existing code as deemed necessary as result of recently
+       implemented requirement or learnings from $LAUREN_DIR/learnings.txt from
+       previous iterations.
+    4. If all requirements are met, create a file $LAUREN_DIR/done to signal goal
+       completion.
+
+    $requirements
+
+    $principles
+  "
+  codex exec --full-auto --add-dir="$(pwd)/.git" "$prompt_one"
+  codex exec --full-auto --add-dir="$(pwd)/.git" "$prompt_two"
+}
+
+if [ ! -f "${LAUREN_DIR}/goal.md" ]; then
+  echo "Error: $f not found" >&2
+  exit 1
+fi
+
+for ((i=1; i<=LAUREN_ITER; i++)); do
+  if [ -f "${LAUREN_DIR}/done" ]; then
+    echo "Goal is achieved. Exiting." >&2
+    exit 0
+  fi
+  echo "--- Iteration $i ---" >&2
+  _iterate
+done
