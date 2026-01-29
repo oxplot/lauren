@@ -32,6 +32,22 @@ _iterate() {
     - Provide clear and concise error messages that help users recover from
       mistakes.
 
+    CLI design principles:
+
+    - Follow POSIX conventions where applicable.
+    - Allow standard input/output redirection and piping.
+    - Allow configuration via command line arguments, environment variables and config
+      files.
+    - Provide clear and concise help and usage information.
+    - Use exit codes to indicate success or failure of commands.
+    - Detect terminals and only show colors and interactive prompts when running
+      in a terminal.
+    - Write messages to standard error, except for command output.
+    - Show progress indicators for long running operations.
+    - Provide sensible defaults that work out of the box.
+    - Allow users to override defaults via configuration.
+    - Do not output unnecessary information. Be concise and to the point.
+
     Code design principles:
 
     - Always start with data model and data flow before thinking about code.
