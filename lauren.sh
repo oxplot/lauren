@@ -75,6 +75,7 @@ _iterate() {
       this.
     - Recording your learnings in a concise manner by appending to
       $LAUREN_DIR/learnings.txt as you go to help future iterations.
+    - Do NOT implement any code in this session.
 
     $requirements
 
@@ -96,6 +97,11 @@ _iterate() {
        previous iterations.
     4. If all requirements are met, create a file $LAUREN_DIR/done to signal goal
        completion.
+
+    Keep these IMPORTANT POINTS in mind:
+    - You MUST ONLY work on ONE requirement at a time.
+    - You MUST test/verify your work end-to-end before considering a requirement as
+      'met'.
 
     $requirements
 
