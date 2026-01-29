@@ -30,13 +30,23 @@ _iterate() {
       using, not overly abstracted, not overly optimized, not overly engineered.
     - Document the 'why' behind blocks of code, not the 'what'.
 
-    Testing principles:
+    Testing and verification principles:
 
-    - If writing unit tests, focus on the interface and contract of the code,
+    - When writing unit tests, focus on the interface and contract of the code,
       not its implementation.
+    - You MUST test/verify your work end-to-end one way or another before
+      marking a requirement as 'met'. For e.g., if building a web app, you MUST
+      test it in a browser. If you are building a library, you MUST test it in a
+      test program that uses the library. If you are building a CLI tool, you MUST
+      test it in a terminal.
     - Write tests that are deterministic, isolated, fast, reliable and
       maintainable.
-    - Favor high level integration tests over low level unit tests.
+    - Favor high level integration tests over low level unit tests and mockery.
+    - Treat tests as first class citizens. They are as important as the code
+      itself and must be maintained with the same level of care.
+    - Tests are ever evolving and must be updated as the code evolves.
+    - Tests must be treated as committable artifacts that are part of the
+      codebase.
   "
   local requirements="
     ## Requirements
