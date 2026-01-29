@@ -95,8 +95,9 @@ _iterate() {
   codex exec --full-auto --add-dir="$(pwd)/.git" "$prompt_two"
 }
 
-if [ ! -f "${LAUREN_DIR}/goal.md" ]; then
-  echo "Error: $f not found" >&2
+goal_file="${LAUREN_DIR}/goal.md"
+if [ ! -f "$goal_file" ]; then
+  echo "Error: $goal_file not found" >&2
   exit 1
 fi
 
